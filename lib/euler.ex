@@ -8,10 +8,10 @@ defmodule Euler do
   def problem_2(limit) do
     fibs()
     |> Stream.take_while(&(&1 < limit))
-    |> Stream.filter(&(0 == rem(&1, 2)))
     |> Enum.sum()
+    |> div(2)
   end
-  defp fibs, do: Stream.unfold({2, 3}, fn({x, y}) -> {x, {y, x + y}} end)
+  defp fibs, do: Stream.unfold({1, 1}, fn({x, y}) -> {x, {y, x + y}} end)
 
   def problem_3(n), do: max_prime_factor(n, 2)
   defp max_prime_factor(1,f),                    do: f
