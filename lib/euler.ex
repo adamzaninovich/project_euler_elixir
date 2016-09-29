@@ -17,4 +17,16 @@ defmodule Euler do
   defp max_prime_factor(1,f),                    do: f
   defp max_prime_factor(n,f) when 0 == rem(n,f), do: max_prime_factor(div(n,f), f)
   defp max_prime_factor(n,f),                    do: max_prime_factor(n, f+1)
+
+  def problem_4(range) do
+    _min..max = range
+    for x <- range, y <- (x..max) do
+      product = x * y
+      str = Integer.to_string(product)
+      {String.reverse(str) == str, product}
+    end
+    |> Stream.filter_map(fn({is_palindrome, _product}) -> is_palindrome end,
+                         fn({_is_palindrome, product}) -> product end)
+    |> Enum.max
+  end
 end
